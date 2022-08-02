@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/main.css'%}">
+    <title>Bek Shop</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="https://t.me/rawnge" target="_blank" rel="noopener noreferrer"><span class="l-initial">B</span>ek</a></div>
+        <div class="nav-link">
+          <ul>
+            <li>Home</li>
+            <li>Blogs</li>
+            <li>Articles</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+        <div class="cta-btn">
+          <button class="btn s-btn">Login</button>
+          <button class="btn p-btn">Sign-Up</button>
+          <a href="{% url 'cart'%}"><img src="{% static 'images/shoppingcart.png' %}" alt=""><p>{{cartItems}}</p></a>
+          
+        </div>
+      </nav>
+    <div class="container">
+        <br>
+        {% block content%}
+        {% endblock content%}
+    </div>
+</body>
+</html>
+<script src="{% static 'js/cart.js' %}"></script>
+<script>
+  var user = `{{request.user}}`
+  function getToken(name) {
+    var cookisValue = null
+    if(document.cookie && document.cookie !== ''){
+      var cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if(cookie.substring(0,name.length + 1) === (name+'=')){
+          cookisValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+        
+      }
+    }
+    return cookisValue;
+  }
+  var csrftoken = getToken('csrftoken');
+</script>

@@ -1,0 +1,33 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{%block content%}
+
+<div class="header">
+    <a href="{% url 'store' %}"><button><- continue Shoping</button></a>
+    
+    <hr>
+    <div class="tot">
+        <div>items: {{order.get_cart_item}}</div>
+        <div>Total:{{order.get_cart_total|floatformat:2}}$</div>
+        <a href="{% url 'checkout' %}"><button>checkout</button></a>
+    </div>
+</div>
+<div class="body">
+    <div class="row">
+        <div></div>
+        <div>Item</div>
+        <div>Price</div>
+        <div>Quantity</div>
+        <div>Total</div>
+    </div>
+    {% for item in items %}
+    <div class="row">
+        <div><img src="{{item.product.imageURL}}" /></div>
+        <div>{{item.product.name}}</div>
+        <div>{{item.product.price|floatformat:2}}$</div>
+        <div ><button data-productid="{{ item.product.id}}" data-action="remove" class=" addbtn">-</button> {{item.quantity}} <button class=" addbtn" data-productid="{{ item.product.id}}" data-action="add">+</button></div>
+        <div>{{item.get_total}}$</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content%}

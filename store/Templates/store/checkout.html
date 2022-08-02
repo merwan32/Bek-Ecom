@@ -1,0 +1,39 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{%block content%}
+<div class="con">
+    <form class="form">
+        <div class="userinfo">
+            <input type="text"  placeholder="Name..">
+            <input type="email"  placeholder="Email..">
+        </div>
+        <hr>
+        <div class="shoppinginfo">
+            <h1>Shopping Information</h1>
+            <input type="text"  placeholder="Address..">
+            <input type="text"  placeholder="City..">
+            <input type="text"  placeholder="State..">
+            <input type="text"  placeholder="Zip Code..">
+        </div>
+        <input type="submit" value="continue">
+    </form>
+    <div class="order">
+        <a href="{% url 'cart' %}"><button><- back to cart</button></a>
+        <hr>
+        <h1>Order Summary</h1>
+        <hr>
+        {% for item in items %}
+        <div class="row">
+            <div><img src="{{item.product.imageURL}}" /></div>
+            <div>{{item.product.name}}</div>
+            <div>{{item.product.price}}$</div>
+            <div>x{{item.quantity}}</div>
+        </div>
+        {%endfor%}
+        <hr>
+        <h5>Items : {{order.get_cart_item}}</h5>
+        <h5>Total : {{order.get_cart_total|floatformat:2}}$</h5>
+    </div>
+</div>
+
+{% endblock content%}

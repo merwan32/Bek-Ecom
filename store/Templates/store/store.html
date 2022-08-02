@@ -1,0 +1,26 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{%block content%}
+<div class="cards">
+  {% for product in products %}
+    <div class="shop-card">
+        <div class="title">
+          {{ product.name }}
+        </div>
+        <div class="desc">
+          
+        </div>
+        <div class="slider">
+          <figure data-color="#E24938, #A30F22">
+            <img src="{{product.imageURL}}" />
+        </div>
+      
+        <div class="cta">
+          <div class="price">${{product.price|floatformat:2}}</div>
+          <button class="btn addbtn" data-productid="{{product.id}}" data-action="add">Add to cart</button>
+        </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock content%}
